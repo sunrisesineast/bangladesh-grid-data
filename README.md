@@ -1,7 +1,8 @@
-﻿# Power Grid Generation Scraper
+# Bangladesh Grid Data
 
-Downloads the hourly generation data from the Power Grid Bangladesh PLC ERP
-portal and saves it to CSV and Excel.
+Downloads hourly generation data from the Power Grid Bangladesh PLC ERP
+portal and saves it to CSV and Excel. Includes analysis scripts and a written
+report on grid trends.
 
 Source: <https://erp.powergrid.gov.bd/w/generations/view_generations>
 
@@ -45,6 +46,17 @@ python scrape.py --dedupe
 | `--retries N` | Max attempts per page (default `4`) |
 | `--dedupe` | Drop duplicate rows by `(Date, Time)` |
 | `--no-excel` | Write only CSV |
+
+## Analysis
+
+After downloading data, run:
+
+```bash
+python analyze.py
+python annotate.py
+```
+
+See `REPORT.md` for findings and `analysis/` for charts.
 
 ## Notes
 
