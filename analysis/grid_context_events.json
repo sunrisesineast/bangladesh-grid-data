@@ -1,0 +1,209 @@
+[
+  {
+    "start": "2022-05-01",
+    "end": "2022-10-31",
+    "category": "fuel",
+    "title": "2022 fuel crisis & load-shedding",
+    "description": "Global LNG/diesel price spike after Russia-Ukraine war forced gas rationing; diesel peakers ran heavily and nationwide load-shedding persisted through late 2022.",
+    "grid_impact": "Liquid Fuel mean generation peaked at 6,391 MW in 2022 (vs 2,301 MW in 2021). Frequent load-shedding reduced effective supply.",
+    "source_url": "https://news.mongabay.com/2022/09/bangladeshi-industries-explore-renewables-as-power-crisis-looms/",
+    "data_verified": true,
+    "data_note": "Liquid Fuel 2022 yearly mean 6,391 MW confirmed in yearly_source_mix.csv"
+  },
+  {
+    "date": "2022-03-22",
+    "category": "capacity",
+    "title": "Payra coal plant commissioned",
+    "description": "1,320 MW Payra ultra-supercritical coal plant (BCPCL) commissioned at Kalapara, Patuakhali — first major USC coal unit and precursor to later Rampal/Matarbari fleet expansion.",
+    "grid_impact": "Early coal baseload addition before 2022 liquid-fuel surge; coal mean still modest in 2022 (874 MW) until Rampal synced.",
+    "source_url": "https://www.enerdata.net/publications/daily-energy-news/bangladesh-commissions-13-gw-coal-fired-power-plant.html",
+    "data_verified": null
+  },
+  {
+    "date": "2022-08-12",
+    "category": "tariff",
+    "title": "Steep tariff hike (Aug 2022)",
+    "description": "Government raised electricity prices sharply (largest since 2020) to partially pass through soaring fuel import costs.",
+    "grid_impact": "Demand-side response limited; crisis driven mainly by supply/fuel constraints rather than price elasticity.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/bangladesh-raises-power-prices-steeply-first-since-2020-2022-08-12/",
+    "data_verified": null
+  },
+  {
+    "date": "2022-10-04",
+    "category": "blackout",
+    "title": "National grid collapse",
+    "description": "National grid failure around 14:00 local caused a ~7-hour blackout affecting most of Bangladesh (~130M people) amid ongoing gas shortages; supply largely restored within seven hours.",
+    "grid_impact": "Hourly total generation fell to minimum 2,830 MW on 4-5 Oct 2022 in PGCB data.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/large-parts-bangladesh-without-power-after-national-grid-failure-daily-star-2022-10-04/",
+    "data_verified": true,
+    "data_note": "Oct 4-5 2022 min total 2,830 MW, max 10,347 MW in cleaned hourly data"
+  },
+  {
+    "date": "2022-11-01",
+    "category": "capacity",
+    "title": "Rampal (Maitree) coal plant grid sync",
+    "description": "1,320 MW Rampal/Maitree Super Thermal Power Plant synchronized to the Bangladesh grid, adding major coal-fired baseload capacity.",
+    "grid_impact": "Coal mean rose from 874 MW (2022) to 2,329 MW (2023) and 3,286 MW (2024) as coal displaced expensive liquid fuel.",
+    "source_url": "https://en.wikipedia.org/wiki/Electricity_sector_in_Bangladesh",
+    "data_verified": true,
+    "data_note": "Coal yearly mean trajectory 521→874→2329→3286 MW matches commissioning timeline"
+  },
+  {
+    "date": "2022-11-22",
+    "category": "tariff",
+    "title": "BERC tariff hike (Nov 2022)",
+    "description": "BERC announced a further per-unit retail electricity tariff increase, the second major adjustment in 2022 after the August hike.",
+    "grid_impact": "Continued cost-recovery during peak fuel-crisis period; supply constraints remained the binding limit on served load.",
+    "source_url": "https://www.scribd.com/document/886969972/Another-Spell-of-Power-Tariff-Hike",
+    "data_verified": null
+  },
+  {
+    "date": "2023-01-30",
+    "category": "policy",
+    "title": "IMF USD 4.7B program approved",
+    "description": "IMF approved extended fund facility as forex reserves fell; conditions included fiscal reforms and scrutiny of energy subsidies/fuel bills.",
+    "grid_impact": "Liquid-fuel generation curtailed sharply in 2023 (mean 1,697 MW vs 6,391 MW in 2022) as dollar shortages limited fuel imports.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/imf-approves-47-bln-loan-bangladesh-2023-01-30/",
+    "data_verified": true,
+    "data_note": "Liquid Fuel 2023 mean 1,697 MW — 73% drop from 2022"
+  },
+  {
+    "date": "2023-01-31",
+    "category": "tariff",
+    "title": "Tariff adjustment (Jan 2023)",
+    "description": "Average retail electricity price raised ~5% as part of cost-recovery efforts under IMF program.",
+    "grid_impact": "Tariff pass-through; generation mix shift to coal and imports more impactful on supply than price change.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/bangladesh-raises-electricity-prices-by-5-average-2023-01-31/",
+    "data_verified": null
+  },
+  {
+    "date": "2023-04-06",
+    "category": "import-deal",
+    "title": "Adani Godda supply begins",
+    "description": "Adani Power's 1,496 MW Godda plant (Jharkhand, India) began exporting electricity to Bangladesh via dedicated transmission.",
+    "grid_impact": "PGCB 'India - Adani' column first shows systematic flows in Aug 2024 (1,515 MW); yearly mean 840 MW in 2024, 994 MW in 2025.",
+    "source_url": "https://www.thehindu.com/business/Industry/adani-power-starts-supplying-electricity-to-bangladesh-from-godda-plant/article67245678.ece",
+    "data_verified": true,
+    "data_note": "MISMATCH: news reports commissioning Apr 2023 but PGCB column first non-zero 2024-08-28 — likely reporting lag or initial sub-threshold flows"
+  },
+  {
+    "date": "2023-05-13",
+    "category": "capacity",
+    "title": "First wind generation recorded",
+    "description": "Utility-scale wind output first appears in PGCB hourly data, marking start of grid-connected wind contribution.",
+    "grid_impact": "Wind remains small (mean ~10 MW in 2024-25) vs solar; renewable share still dominated by solar and hydro.",
+    "source_url": "https://en.wikipedia.org/wiki/Electricity_sector_in_Bangladesh",
+    "data_verified": true,
+    "data_note": "Wind first non-zero 2023-05-13 13:00 in full cleaned history"
+  },
+  {
+    "date": "2023-05-22",
+    "category": "fuel",
+    "title": "Dollar shortage hits fuel imports",
+    "description": "State petroleum firm BPC warned of falling fuel reserves and >$300M owed to overseas suppliers as dollar shortage constrained fuel import payments, threatening supply disruptions.",
+    "grid_impact": "Reinforced 2023 curtailment of liquid-fuel generation (mean 1,697 MW) as import finance became binding.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/bangladesh-struggles-pay-fuel-imports-dollar-crisis-worsens-letters-2023-05-22/",
+    "data_verified": true,
+    "data_note": "Liquid Fuel 2023 mean 1,697 MW — aligns with import-payment constraints under IMF program"
+  },
+  {
+    "date": "2024-01-07",
+    "category": "political",
+    "title": "January 2024 general election",
+    "description": "Awami League returned to power amid opposition boycott; energy subsidy and import-payment policies continued under same administration.",
+    "grid_impact": "No abrupt generation shift in Jan 2024 data; coal and solar growth trends continued.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/bangladesh-holds-election-marked-by-opposition-boycott-2024-01-07/",
+    "data_verified": true,
+    "data_note": "2024 yearly means stable transition from 2023 (total 11,171 vs 10,577 MW)"
+  },
+  {
+    "date": "2024-08-08",
+    "category": "political",
+    "title": "Interim government (Yunus)",
+    "description": "Sheikh Hasina resigned after mass protests; Nobel laureate Muhammad Yunus sworn in to lead interim government. Interim administration later initiated reviews and renegotiation of legacy power-purchase deals.",
+    "grid_impact": "Power-sector reviews of Adani and fuel contracts followed; no immediate drop in recorded generation in Aug-Sep 2024.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/bangladeshs-interim-leader-yunus-takes-oath-2024-08-08/",
+    "data_verified": true,
+    "data_note": "Daily mean total stable ~11,000-12,000 MW through Aug 2024"
+  },
+  {
+    "date": "2024-08-28",
+    "category": "import-deal",
+    "title": "Adani flows in PGCB data",
+    "description": "First non-zero hourly reading in 'India - Adani' column at 1,515 MW, indicating systematic reporting of Godda imports.",
+    "grid_impact": "Adani became ~840-1,020 MW yearly mean contributor (~7-9% of total generation).",
+    "source_url": "https://www.reuters.com/business/energy/adani-plant-allowed-sell-bangladesh-bound-power-india-after-rules-amended-2024-08-13/",
+    "data_verified": true,
+    "data_note": "First non-zero 2024-08-28 01:00 at 1,515 MW in cleaned CSV"
+  },
+  {
+    "date": "2024-11-14",
+    "category": "import-deal",
+    "title": "Nepal import via India",
+    "description": "First trilateral Nepal→India→Bangladesh power flow inaugurated (up to 40 MW) under Oct 2024 tripartite sales agreement; PGCB Nepal column shows flows from 14 Nov 2024.",
+    "grid_impact": "Nepal column first non-zero 38 MW on 2024-11-14; sustained ~38 MW from mid-2025.",
+    "source_url": "https://www.mea.gov.in/press-releases.htm?dtl/38523/Inauguration_of_first_trilateral_power_transaction__from_Nepal_to_Bangladesh_through_the_Indian_Grid",
+    "data_verified": true,
+    "data_note": "MEA inauguration 2024-11-15; Nepal first non-zero 2024-11-14 19:00 at 38 MW — aligns with ~40 MW deal"
+  },
+  {
+    "start": "2024-04-01",
+    "end": "2024-06-30",
+    "category": "fuel",
+    "title": "2024 pre-monsoon heatwave",
+    "description": "Severe heatwave drove record cooling demand and renewed load-shedding concerns, though less acute than 2022 crisis.",
+    "grid_impact": "April remains peak demand month (12,245 MW mean); solar share dips in May-Jun as irrigation load dominates.",
+    "source_url": "https://www.reuters.com/world/asia-pacific/bangladesh-faces-worst-power-cuts-since-2022-amid-heatwave-2024-04-23/",
+    "data_verified": true,
+    "data_note": "monthly_summary.csv: Apr peak 12,245 MW mean; Jun solar dips to 83 MW mean"
+  },
+  {
+    "date": "2025-03-09",
+    "category": "import-deal",
+    "title": "Adani deal renegotiation",
+    "description": "Interim-government committee sought to renegotiate Adani Godda PPA terms including tax rebate, surcharge, and coal-price pass-through after payment disputes.",
+    "grid_impact": "Adani supply had been reduced over unpaid dues; renegotiation aimed to stabilize ~1,600 MW import channel.",
+    "source_url": "https://www.tbsnews.net/bangladesh/infrastructure/adani-deal-govt-body-renegotiating-tax-rebate-surcharge-coal-price-1087866",
+    "data_verified": null
+  },
+  {
+    "date": "2025-03-28",
+    "category": "import-deal",
+    "title": "Adani supply restored",
+    "description": "Adani Power restored full electricity exports to Bangladesh after roughly four months of reduced supply over unpaid bills.",
+    "grid_impact": "Godda imports returned to contracted levels; Adani remained ~1 GW-class contributor in 2025 PGCB data.",
+    "source_url": "https://www.bbc.com/news/articles/cp3y3nqpez2o",
+    "data_verified": null
+  },
+  {
+    "date": "2026-02-12",
+    "category": "political",
+    "title": "February 2026 general election",
+    "description": "Bangladesh held its first post-uprising parliamentary election; BNP-led coalition won, with Tarique Rahman sworn in as prime minister days later.",
+    "grid_impact": "New administration signalled power-sector contract reviews and subsidy reform; generation data through Jun 2026 shows continued coal/import baseload.",
+    "source_url": "https://carnegieendowment.org/research/2026/05/bangladeshs-unfinished-revolution",
+    "data_verified": null
+  },
+  {
+    "start": "2021-06-04",
+    "end": "2026-06-04",
+    "category": "policy",
+    "title": "Solar capacity build-out",
+    "description": "Government approved utility-scale solar parks; grid solar grew steadily though share remains under 2% of total generation.",
+    "grid_impact": "Solar mean 26→162 MW; yearly max 929 MW in 2025; solar share 0.27%→1.44%.",
+    "source_url": "https://rise.esmap.org/sites/default/files/library/bangladesh/Renewable%20Energy/Bangladesh_National-Solar-Energy-Roadmap.pdf",
+    "data_verified": true,
+    "data_note": "solar_capacity_growth.csv and yearly_summary.csv confirm trajectory"
+  },
+  {
+    "start": "2021-06-04",
+    "end": "2026-06-04",
+    "category": "capacity",
+    "title": "Coal displacement of liquid fuel",
+    "description": "Payra, Rampal, and growing coal fleet shifted baseload from expensive oil/gas peakers to coal.",
+    "grid_impact": "Coal share rose from 5% to 32% of mean generation; Liquid Fuel fell from 24% to 7% of mix (2021 vs 2026).",
+    "source_url": "https://en.wikipedia.org/wiki/Electricity_sector_in_Bangladesh",
+    "data_verified": true,
+    "data_note": "yearly_source_mix.csv: Coal 521→3621 MW, Liquid Fuel 2301→797 MW"
+  }
+]
