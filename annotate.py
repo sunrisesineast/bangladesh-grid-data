@@ -145,7 +145,7 @@ def daily_solar_chart(daily_df: pd.DataFrame, events: list[dict]) -> None:
     ax.plot(daily_df.index, daily_df["mean_solar_MW"].rolling(30).mean(),
             color="black", lw=1.5, label="30-day rolling mean", zorder=2)
     annotate_ax(ax, filtered, y_top_frac=0.88)
-    ax.set_title("Daily Mean Solar Generation (annotated with grid events)")
+    ax.set_title("Daily Daylight-Mean Solar Generation (06:00–18:59, annotated)")
     ax.set_ylabel("MW")
     ax.legend(fontsize=8)
     path = os.path.join(OUT_DIR, "daily_solar_timeseries_annotated.png")

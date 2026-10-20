@@ -53,6 +53,13 @@ IMPORT_COLS = ["India - Bheramara HVDC", "India - Tripura", "India - Adani", "Ne
 RENEWABLE_COLS = ["Solar", "Wind", "Hydro"]
 TOTAL_COL = "Generation(MW)"
 
+# Clock hours 06:00–18:59. In this series solar is ~0 outside that window
+# (hour 6 ~5 MW, hour 18 ~7 MW; hours 0–5 and 19–23 are ~0). The 19:30
+# evening-peak row falls in hour 19 and stays out. Means of Solar use this
+# window; solar share stays energy over every hour, so night zeros do not
+# inflate the share.
+DAYLIGHT_HOURS = frozenset(range(6, 19))
+
 plt.rcParams.update({
     "figure.autolayout": True,
     "axes.grid": True,
@@ -64,6 +71,12 @@ plt.rcParams.update({
 def banner(title: str) -> None:
     line = "=" * 78
     print(f"\n{line}\n{title}\n{line}")
+
+
+def solar_daylight_mean(df: pd.DataFrame, by: str) -> pd.Series:
+    """Mean Solar MW over daylight rows only, grouped by `by`."""
+    day = df[df["hour"].isin(DAYLIGHT_HOURS)]
+    return day.groupby(by)["Solar"].mean()
 
 
 def save_fig(fig, name: str) -> str:
@@ -198,19 +211,22 @@ def first_appearance(df_full: pd.DataFrame) -> None:
 # --------------------------------------------------------------------------- #
 def yearly(df: pd.DataFrame) -> pd.DataFrame:
     banner("YEARLY TRENDS")
+    print("mean_solar_MW is the daylight mean (06:00-18:59). "
+          "solar_share_% is still solar energy / total energy over all hours.")
     g = df.groupby("year")
     yr = pd.DataFrame({
         "mean_total_MW": g[TOTAL_COL].mean(),
         "peak_total_MW": g[TOTAL_COL].max(),
-        "mean_solar_MW": g["Solar"].mean(),
+        "mean_solar_MW": solar_daylight_mean(df, "year"),
         "max_solar_MW": g["Solar"].max(),
         "mean_wind_MW": g["Wind"].mean(),
         "mean_hydro_MW": g["Hydro"].mean(),
         "mean_renewable_MW": g["Renewable"].mean(),
     })
-    # Renewable share % uses mean MW ratio.
+    # Share stays an all-hours energy ratio. Dividing the daylight mean by
+    # the 24h total would about double it.
     yr["renewable_share_%"] = 100 * yr["mean_renewable_MW"] / yr["mean_total_MW"]
-    yr["solar_share_%"] = 100 * yr["mean_solar_MW"] / yr["mean_total_MW"]
+    yr["solar_share_%"] = 100 * g["Solar"].mean() / yr["mean_total_MW"]
 
     # Solar growth YoY (based on yearly mean solar).
     yr["solar_yoy_%"] = yr["mean_solar_MW"].pct_change() * 100
@@ -278,11 +294,12 @@ def monthly(df: pd.DataFrame) -> pd.DataFrame:
     mo = pd.DataFrame({
         "mean_total_MW": g[TOTAL_COL].mean(),
         "peak_total_MW": g[TOTAL_COL].max(),
-        "mean_solar_MW": g["Solar"].mean(),
+        "mean_solar_MW": solar_daylight_mean(df, "month"),
         "mean_renewable_MW": g["Renewable"].mean(),
     })
+    # Align on month numbers first; names would not match g["Solar"].mean().
+    mo["solar_share_%"] = 100 * g["Solar"].mean() / mo["mean_total_MW"]
     mo.index = [MONTH_NAMES[m - 1] for m in mo.index]
-    mo["solar_share_%"] = 100 * mo["mean_solar_MW"] / mo["mean_total_MW"]
     print(mo.to_string())
     save_table(mo.round(2), "monthly_summary.csv")
 
@@ -291,7 +308,7 @@ def monthly(df: pd.DataFrame) -> pd.DataFrame:
     print(f"\nHighest demand month: {hi} ({mo.loc[hi, 'mean_total_MW']:,.0f} MW avg)")
     print(f"Lowest demand month:  {lo} ({mo.loc[lo, 'mean_total_MW']:,.0f} MW avg)")
     print(f"Highest solar month:  {mo['mean_solar_MW'].idxmax()} "
-          f"({mo['mean_solar_MW'].max():,.0f} MW avg)")
+          f"({mo['mean_solar_MW'].max():,.0f} MW daylight avg)")
 
     fig, ax = plt.subplots(figsize=(10, 5))
     x = range(len(mo))
@@ -299,8 +316,8 @@ def monthly(df: pd.DataFrame) -> pd.DataFrame:
     ax.set_xticks(list(x))
     ax.set_xticklabels(mo.index)
     ax2 = ax.twinx()
-    ax2.plot(x, mo["mean_solar_MW"], "o-", color="#DD8452", label="Mean solar MW")
-    ax2.plot(x, mo["mean_renewable_MW"], "s--", color="#55A868", label="Mean renewable MW")
+    ax2.plot(x, mo["mean_solar_MW"], "o-", color="#DD8452", label="Daylight-mean solar MW")
+    ax2.plot(x, mo["mean_renewable_MW"], "s--", color="#55A868", label="24h-mean renewable MW")
     ax2.grid(False)
     ax.set_ylabel("Total MW")
     ax2.set_ylabel("Solar / Renewable MW")
@@ -323,9 +340,12 @@ def daily(df: pd.DataFrame) -> pd.DataFrame:
     daily_df = df.groupby("date").agg(
         mean_total_MW=(TOTAL_COL, "mean"),
         peak_total_MW=(TOTAL_COL, "max"),
-        mean_solar_MW=("Solar", "mean"),
         mean_renewable_MW=("Renewable", "mean"),
     )
+    daily_df["mean_solar_MW"] = solar_daylight_mean(df, "date")
+    daily_df = daily_df[
+        ["mean_total_MW", "peak_total_MW", "mean_solar_MW", "mean_renewable_MW"]
+    ]
     save_table(daily_df.round(2), "daily_timeseries.csv")
     print(f"Daily series rows: {len(daily_df):,}")
     print(daily_df.describe().round(1).to_string())
@@ -347,7 +367,7 @@ def daily(df: pd.DataFrame) -> pd.DataFrame:
     ax.plot(daily_df.index, daily_df["mean_solar_MW"], color="#DD8452", lw=0.8)
     ax.plot(daily_df.index, daily_df["mean_solar_MW"].rolling(30).mean(), color="black", lw=1.5,
             label="30-day rolling mean")
-    ax.set_title("Daily Mean Solar Generation Over the Last 5 Years")
+    ax.set_title("Daily Daylight-Mean Solar Generation (06:00–18:59)")
     ax.set_ylabel("MW")
     ax.legend(fontsize=8)
     save_fig(fig, "daily_solar_timeseries.png")
@@ -442,18 +462,19 @@ def solar_deepdive(df: pd.DataFrame, df_full: pd.DataFrame) -> None:
     cap = df_full.groupby("year").agg(
         max_solar_MW=("Solar", "max"),
         p99_solar_MW=("Solar", lambda s: s.quantile(0.99)),
-        mean_solar_MW=("Solar", "mean"),
         max_wind_MW=("Wind", "max"),
         max_hydro_MW=("Hydro", "max"),
     )
+    cap.insert(2, "mean_solar_MW", solar_daylight_mean(df_full, "year"))
     save_table(cap.round(1), "solar_capacity_growth.csv")
     print("\nYearly MAX solar (proxy for installed capacity) — full history:")
     print(cap.round(0).to_string())
 
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.bar(cap.index.astype(str), cap["max_solar_MW"], color="#DD8452", label="Yearly max solar MW")
-    ax.plot(cap.index.astype(str), cap["mean_solar_MW"], "o-", color="black", label="Yearly mean solar MW")
-    ax.set_title("Solar Growth: Yearly Max (capacity proxy) & Mean Output")
+    ax.plot(cap.index.astype(str), cap["mean_solar_MW"], "o-", color="black",
+            label="Daylight-mean solar MW")
+    ax.set_title("Solar Growth: Yearly Max (capacity proxy) & Daylight-Mean Output")
     ax.set_ylabel("MW")
     ax.legend()
     save_fig(fig, "solar_yearly_growth.png")
